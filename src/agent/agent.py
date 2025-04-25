@@ -10,6 +10,12 @@ from aiwolf_nlp_common.packet import Info, Packet, Request, Role, Setting, Statu
 
 from utils.agent_logger import AgentLogger
 from utils.stoppable_thread import StoppableThread
+import openai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -85,6 +91,17 @@ class Agent:
 
         return _wrapper
 
+    @staticmethod
+    def generate_statement(prompt_text: str) -> str:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-1106-preview",  # gpt-4-turbo
+            messages=[
+                {"role": "system", "content": "あなたは人狼知能のプレイヤーです。"},
+                {"role": "user", "content": prompt_text},
+            ],
+        )
+        return response["choices"][0]["message"]["content"]
+
     def set_packet(self, packet: Packet) -> None:
         """パケット情報をセットする."""
         self.request = packet.request
@@ -124,6 +141,13 @@ class Agent:
     def talk(self) -> str:
         """トークリクエストに対する応答を返す."""
         return random.choice(self.comments)  # noqa: S311
+
+    def talk(self):
+        """トークリクエストに対する応答を返す。"""
+        prompt = f"{self.name}です。今日は{self.game_day}日目です。あなたは{self.role}です。次に話すべき内容を1文で答えてください。"
+        # OpenAIの関数を呼び出す
+        statement = self.generate_statement(prompt)
+        return statement
 
     def daily_finish(self) -> None:
         """昼終了リクエストに対する処理を行う."""
