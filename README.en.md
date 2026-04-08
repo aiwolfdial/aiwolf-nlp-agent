@@ -12,6 +12,8 @@ This is a sample agent for the AIWolf Competition (Natural Language Division).
 ## Table of Contents
 
 - [Environment Setup](#environment-setup)
+  - [Using uv](#using-uv)
+  - [Without uv](#without-uv)
 - [How to Run](#how-to-run)
   - [Running the Agent](#running-the-agent)
     - [How to Start with a Specific Configuration File](#how-to-start-with-a-specific-configuration-file)
