@@ -49,6 +49,19 @@ For game servers for local testing and self-play, please refer to [aiwolfdial/ai
 > [!IMPORTANT]
 > Python 3.11 or higher is required.
 
+### Using uv
+
+```bash
+git clone https://github.com/aiwolfdial/aiwolf-nlp-agent.git
+cd aiwolf-nlp-agent
+cp config/config.yml.example config/config.yml
+uv sync
+```
+
+When using uv, replace `python src/main.py` with `uv run src/main.py` in the instructions below.
+
+### Without uv
+
 ```bash
 git clone https://github.com/aiwolfdial/aiwolf-nlp-agent.git
 cd aiwolf-nlp-agent

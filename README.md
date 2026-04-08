@@ -49,6 +49,19 @@
 > [!IMPORTANT]
 > Python 3.11以上が必要です。
 
+### uvを使用する場合
+
+```bash
+git clone https://github.com/aiwolfdial/aiwolf-nlp-agent.git
+cd aiwolf-nlp-agent
+cp config/config.yml.example config/config.yml
+uv sync
+```
+
+uvを使用する場合、以下の`python src/main.py`などを`uv run src/main.py`と読み替えてください。
+
+### uvを使用しない場合
+
 ```bash
 git clone https://github.com/aiwolfdial/aiwolf-nlp-agent.git
 cd aiwolf-nlp-agent
